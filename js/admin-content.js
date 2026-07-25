@@ -1,6 +1,7 @@
-// Renders a form from CONTENT_FIELDS with individual Save + Clear buttons
-// per field. Image/video fields support direct file upload to Supabase
-// Storage (bucket: "media") instead of pasting a URL.
+// Renders a form from CONTENT_FIELDS as a collapsible accordion (one
+// section per page/group), with a jump-to dropdown at the top so long
+// lists are easy to navigate. Individual Save + Clear buttons per field.
+// Image/video fields support direct file upload to Supabase Storage.
 
 async function initContentEditor() {
   const container = document.getElementById("content-editor");
@@ -20,18 +21,58 @@ async function initContentEditor() {
     if (!groups[field.group]) groups[field.group] = [];
     groups[field.group].push(field);
   });
+  const groupNames = Object.keys(groups);
 
-  container.innerHTML = Object.entries(groups)
+  // Jump-to dropdown
+  const jumpBar = `
+    <div class="admin-card" style="padding:20px 30px;">
+      <label style="display:block; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Jump to section</label>
+      <select id="section-jump" style="width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:2px; font-family:var(--font-body); font-size:14.5px; background:var(--parchment); color:var(--ink);">
+        <option value="">— Select a section —</option>
+        ${groupNames.map((g) => `<option value="${cssId(g)}">${g}</option>`).join("")}
+      </select>
+    </div>`;
+
+  const accordion = groupNames
     .map(
-      ([groupName, fields]) => `
-      <div class="admin-card">
-        <h2 style="font-size:18px;">${groupName}</h2>
-        <div style="margin-top:16px;">
-          ${fields.map((f) => renderField(f, existing)).join("")}
+      (groupName, i) => `
+      <div class="admin-card accordion-section" id="${cssId(groupName)}" style="padding:0; overflow:hidden;">
+        <button class="accordion-header" data-index="${i}" style="width:100%; text-align:left; background:var(--parchment-dim); border:none; padding:20px 30px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-display); font-size:18px; color:var(--navy);">
+          <span>${groupName}</span>
+          <span class="accordion-arrow" style="font-family:var(--font-mono); font-size:14px;">▸</span>
+        </button>
+        <div class="accordion-body" style="display:none; padding:24px 30px;">
+          ${groups[groupName].map((f) => renderField(f, existing)).join("")}
         </div>
       </div>`
     )
     .join("");
+
+  container.innerHTML = jumpBar + accordion;
+
+  // Accordion toggle
+  document.querySelectorAll(".accordion-header").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const body = btn.nextElementSibling;
+      const arrow = btn.querySelector(".accordion-arrow");
+      const isOpen = body.style.display === "block";
+      body.style.display = isOpen ? "none" : "block";
+      arrow.textContent = isOpen ? "▸" : "▾";
+    });
+  });
+
+  // Jump-to dropdown behaviour
+  document.getElementById("section-jump").addEventListener("change", (e) => {
+    const id = e.target.value;
+    if (!id) return;
+    const section = document.getElementById(id);
+    const header = section.querySelector(".accordion-header");
+    const body = section.querySelector(".accordion-body");
+    const arrow = section.querySelector(".accordion-arrow");
+    body.style.display = "block";
+    arrow.textContent = "▾";
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 
   document.querySelectorAll(".field-save-btn").forEach((btn) => {
     btn.addEventListener("click", () => saveOneField(btn.dataset.key));
@@ -39,6 +80,10 @@ async function initContentEditor() {
   document.querySelectorAll(".field-clear-btn").forEach((btn) => {
     btn.addEventListener("click", () => clearOneField(btn.dataset.key));
   });
+}
+
+function cssId(str) {
+  return "section-" + str.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }
 
 function renderField(f, existing) {

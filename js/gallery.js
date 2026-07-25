@@ -1,4 +1,8 @@
 // Pulls rows from the `gallery_images` table and renders them into the grid.
+// Handles three media types automatically based on the saved URL:
+// - YouTube links -> embedded iframe player
+// - .mp4 links -> native video player
+// - anything else -> image
 // Table columns expected: id, image_url, caption, category, sort_order, created_at
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -19,23 +23,53 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    grid.innerHTML = data
+    const itemsHtml = data
       .map(
         (item) => `
-        <div class="g-item reveal" title="${escapeHtml(item.caption || "")}">
-          <img src="${item.image_url}" alt="${escapeHtml(item.caption || "Academy photo")}" loading="lazy" />
+        <div class="g-item reveal in" title="${escapeHtml(item.caption || "")}">
+          ${mediaHtml(item.image_url, item.caption)}
         </div>`
       )
       .join("");
 
-    // Re-trigger reveal animation for newly injected nodes
-    grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
+    // Only duplicate for the seamless scroll loop once there are enough
+    // photos — with just 1-3 items, duplication just looks like a mistake.
+    if (data.length >= 4) {
+      grid.innerHTML = `<div class="gallery-marquee-track">${itemsHtml}${itemsHtml}</div>`;
+    } else {
+      grid.innerHTML = `<div class="gallery-marquee-track" style="animation:none;">${itemsHtml}</div>`;
+    }
   } catch (err) {
     console.error(err);
     empty.textContent = "Gallery is warming up — please refresh in a moment.";
     empty.style.display = "block";
   }
 });
+
+function getYouTubeId(url) {
+  if (!url) return null;
+  const patterns = [
+    /youtube\.com\/watch\?v=([^&]+)/,
+    /youtu\.be\/([^?]+)/,
+    /youtube\.com\/embed\/([^?]+)/,
+  ];
+  for (const p of patterns) {
+    const m = url.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function mediaHtml(url, caption) {
+  const ytId = getYouTubeId(url);
+  if (ytId) {
+    return `<iframe src="https://www.youtube.com/embed/${ytId}" style="width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>`;
+  } else if (url && url.match(/\.mp4($|\?)/i)) {
+    return `<video src="${url}" style="width:100%;height:100%;object-fit:cover;" muted loop playsinline controls></video>`;
+  } else {
+    return `<img src="${url}" alt="${escapeHtml(caption || "Academy photo")}" loading="lazy" />`;
+  }
+}
 
 function escapeHtml(str) {
   const div = document.createElement("div");

@@ -31,7 +31,6 @@
       <a href="admissions.html">Admissions</a>
       <a href="faculty.html" class="active">Faculty</a>
       <a href="gallery.html">Gallery</a>
-      <a href="news.html">News</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-cta">
@@ -51,30 +50,12 @@
 <section>
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Leadership</span>
-      <h2>Guiding the academy</h2>
+      <span class="eyebrow">Our People</span>
+      <h2>Leadership &amp; Teaching Staff</h2>
+      <p>Click any profile to read their full bio.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card reveal"><div class="thumb"><img data-key="faculty_principal_photo" src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=500&q=80" alt="Principal" /></div><div class="body"><span class="tag">Principal</span><h3 data-key="faculty_principal_name">[Principal's Name]</h3><p>25+ years in K-12 education leadership, with a focus on inclusive pedagogy.</p></div></div>
-      <div class="card reveal"><div class="thumb"><img data-key="faculty_vp_photo" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&q=80" alt="Vice Principal" /></div><div class="body"><span class="tag">Vice Principal</span><h3 data-key="faculty_vp_name">[Name]</h3><p>Coordinates curriculum delivery and teacher training across all grades.</p></div></div>
-      <div class="card reveal"><div class="thumb"><img data-key="faculty_director_photo" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" alt="Director of Academics" /></div><div class="body"><span class="tag">Director of Academics</span><h3 data-key="faculty_director_name">[Name]</h3><p>Sets curriculum direction and academic quality standards across all grades.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section style="background:var(--parchment-dim);">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Department Heads</span>
-      <h2>Subject specialists</h2>
-      <p>Edit these anytime from the admin panel once your real staff details are ready.</p>
-    </div>
-    <div class="grid grid-4">
-      <div class="card reveal"><div class="thumb"><img data-key="faculty_science_photo" src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80" alt="Science HOD" /></div><div class="body"><span class="tag">Science</span><h3 data-key="faculty_science_name">[Name]</h3></div></div>
-      <div class="card reveal"><div class="thumb"><img data-key="faculty_math_photo" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&q=80" alt="Mathematics HOD" /></div><div class="body"><span class="tag">Mathematics</span><h3 data-key="faculty_math_name">[Name]</h3></div></div>
-      <div class="card reveal"><div class="thumb"><img data-key="faculty_english_photo" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" alt="English HOD" /></div><div class="body"><span class="tag">English</span><h3 data-key="faculty_english_name">[Name]</h3></div></div>
-      <div class="card reveal"><div class="thumb"><img data-key="faculty_sports_photo" src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&q=80" alt="Sports HOD" /></div><div class="body"><span class="tag">Sports</span><h3 data-key="faculty_sports_name">[Name]</h3></div></div>
-    </div>
+    <div id="faculty-grid" class="grid grid-3"></div>
+    <div id="faculty-empty" class="empty-state" style="display:none;">No faculty added yet — add staff from the admin panel's Faculty tab.</div>
   </div>
 </section>
 
@@ -99,7 +80,7 @@
         <p data-key="footer_blurb" style="max-width:280px; font-size:14px;">A CBSE-aligned school for Pre-KG through Grade 10, built around academics, character and a genuinely global outlook.</p>
         <div class="social-row" style="margin-top:20px;"><a href="#">f</a><a href="#">◎</a><a href="#">▶</a><a href="#">in</a></div>
       </div>
-      <div><h4>Explore</h4><ul><li><a href="about.html">About Us</a></li><li><a href="academics.html">Academics</a></li><li><a href="campus-life.html">Campus Life</a></li><li><a href="faculty.html">Faculty</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="news.html">News &amp; Events</a></li></ul></div>
+      <div><h4>Explore</h4><ul><li><a href="about.html">About Us</a></li><li><a href="academics.html">Academics</a></li><li><a href="campus-life.html">Campus Life</a></li><li><a href="faculty.html">Faculty</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
       <div><h4>Admissions</h4><ul><li><a href="admissions.html">Apply Now</a></li><li><a href="admissions.html">Fee Structure</a></li><li><a href="admissions.html">Scholarships</a></li><li><a href="contact.html">Contact Admissions</a></li></ul></div>
       <div><h4>Reach Us</h4><ul><li data-key="site_address">[Your School Address], Bengaluru, Karnataka, India</li><li><a href="tel:+919999999999" data-key="site_phone">+91 99999 99999</a></li><li><a href="mailto:admissions@pvminternationalacademy.com" data-key="site_email_admissions">admissions@pvminternationalacademy.com</a></li></ul></div>
     </div>
@@ -113,6 +94,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
 <script src="js/content.js"></script>
+<script src="js/faculty.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
