@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — PVM International Academy</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  body { background: var(--parchment-dim); }
+  .admin-wrap { max-width: 820px; margin: 0 auto; padding: 60px 24px 100px; }
+  .admin-card { background: var(--white); border: 1px solid var(--line); border-radius: 2px; padding: 30px; margin-bottom: 24px; }
+  .admin-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .admin-row img { width: 46px; height: 46px; object-fit: cover; border-radius: 2px; }
+  .admin-row span { flex: 1; }
+  .admin-row button { background: none; border: 1px solid #B23A3A; color: #B23A3A; font-family: var(--font-mono); font-size: 11px; padding: 6px 10px; border-radius: 2px; cursor: pointer; }
+  .top-bar-admin { display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; }
+  .admin-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+  .admin-tab { padding: 10px 18px; border: 1px solid var(--line); background: var(--white); border-radius: 2px; cursor: pointer; font-family: var(--font-mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; }
+  .admin-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+  .admin-panel-section { display: none; }
+  .admin-panel-section.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="admin-wrap">
+  <div class="top-bar-admin">
+    <div class="brand">
+      <img src="assets/logo.png" alt="PVM logo" style="height:38px; background:#fff; padding:4px; border-radius:4px;" />
+      <strong style="font-family:var(--font-display); color:var(--navy);">Admin Panel</strong>
+    </div>
+    <div>
+      <span id="whoami" style="font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); margin-right:14px;"></span>
+      <button id="logout-btn" class="btn btn-outline-navy" style="display:inline-block;">Log Out</button>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="login-panel" class="admin-card">
+    <h2 style="font-size:22px;">Staff Sign-In</h2>
+    <p style="color:var(--ink-soft); font-size:13.5px; margin-bottom:20px;">Edit any text or photo across the site here. Upload a file or type text, then click Save on that specific field — changes go live the moment you refresh the page.</p>
+    <form id="login-form" style="margin-top:20px;">
+      <div class="field"><label for="login-email">Email</label><input id="login-email" type="email" required /></div>
+      <div class="field"><label for="login-password">Password</label><input id="login-password" type="password" required /></div>
+      <button type="submit" class="btn btn-gold">Sign In</button>
+      <div id="login-error" class="form-status err" style="display:none; margin-top:14px;"></div>
+    </form>
+  </div>
+
+  <!-- ADMIN CONTENT -->
+  <div id="admin-panel" style="display:none;">
+
+    <div class="admin-tabs">
+      <div class="admin-tab active" data-tab="content">Site Content</div>
+      <div class="admin-tab" data-tab="gallery">Gallery</div>
+      <div class="admin-tab" data-tab="news">News &amp; Events</div>
+    </div>
+
+    <!-- TAB: SITE CONTENT (edit any text/photo on the site) -->
+    <div class="admin-panel-section active" id="tab-content">
+      <p style="color:var(--ink-soft); font-size:13.5px; margin-bottom:20px;">Edit any text or photo across the site here. Changes go live the moment you click "Save All Changes" and refresh the page.</p>
+      <div id="content-editor"></div>
+    </div>
+
+    <!-- TAB: GALLERY -->
+    <div class="admin-panel-section" id="tab-gallery">
+      <div class="admin-card">
+        <h2 style="font-size:20px;">Add Gallery Photo</h2>
+        <form id="gallery-form" style="margin-top:16px;">
+          <div class="field"><label>Image URL</label><input name="image_url" type="url" required placeholder="https://…" /></div>
+          <div class="form-row">
+            <div class="field"><label>Caption</label><input name="caption" type="text" /></div>
+            <div class="field"><label>Category</label><input name="category" type="text" placeholder="Sports Day, Annual Function…" /></div>
+          </div>
+          <div class="field"><label>Sort Order (lower shows first)</label><input name="sort_order" type="number" value="0" /></div>
+          <button type="submit" class="btn btn-gold">Add Photo</button>
+        </form>
+        <h3 style="font-size:15px; margin-top:26px;">Current Photos</h3>
+        <div id="gallery-list" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
+    <!-- TAB: NEWS -->
+    <div class="admin-panel-section" id="tab-news">
+      <div class="admin-card">
+        <h2 style="font-size:20px;">Add News / Event Post</h2>
+        <form id="news-form" style="margin-top:16px;">
+          <div class="field"><label>Title</label><input name="title" type="text" required /></div>
+          <div class="field"><label>Summary</label><textarea name="summary"></textarea></div>
+          <div class="form-row">
+            <div class="field"><label>Cover Image URL</label><input name="cover_image_url" type="url" placeholder="https://…" /></div>
+            <div class="field"><label>Category</label><input name="category" type="text" placeholder="Announcement, Event, Achievement…" /></div>
+          </div>
+          <button type="submit" class="btn btn-gold">Publish Post</button>
+        </form>
+        <h3 style="font-size:15px; margin-top:26px;">Published Posts</h3>
+        <div id="news-list" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/content-fields.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/admin-content.js"></script>
+<script>
+  // Tab switching
+  document.querySelectorAll(".admin-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".admin-tab").forEach((t) => t.classList.remove("active"));
+      document.querySelectorAll(".admin-panel-section").forEach((s) => s.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById("tab-" + tab.dataset.tab).classList.add("active");
+    });
+  });
+</script>
+</body>
+</html>

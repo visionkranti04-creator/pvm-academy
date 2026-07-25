@@ -1,0 +1,140 @@
+// Master list of every editable piece of content on the site.
+// Each entry becomes one field in the admin panel automatically.
+// type: "text" | "textarea" | "image"
+// "default" = the current placeholder value already live on the site,
+// shown pre-filled in the admin panel so you're editing, not starting blank.
+
+const CONTENT_FIELDS = [
+  // ---------- GLOBAL ----------
+  { key: "site_phone", label: "Phone Number (shown everywhere)", type: "text", group: "Global — Contact Info", default: "+91 99999 99999" },
+  { key: "site_email_admissions", label: "Admissions Email", type: "text", group: "Global — Contact Info", default: "admissions@pvminternationalacademy.com" },
+  { key: "site_email_general", label: "General Email", type: "text", group: "Global — Contact Info", default: "info@pvminternationalacademy.com" },
+  { key: "site_address", label: "School Address", type: "textarea", group: "Global — Contact Info", default: "[Your School Address], Bengaluru, Karnataka, India" },
+  { key: "footer_blurb", label: "Footer Description Text", type: "textarea", group: "Global — Contact Info", default: "A CBSE-aligned school for Pre-KG through Grade 10, built around academics, character and a genuinely global outlook." },
+
+  // ---------- HOME — HERO ----------
+  { key: "home_hero_video", label: "Hero Background Video (URL)", type: "image", group: "Home — Hero", default: "https://developer.mozilla.org/shared-assets/videos/flower.mp4" },
+  { key: "home_hero_title_line1", label: "Hero Title — Line 1", type: "text", group: "Home — Hero", default: "Grounded in values." },
+  { key: "home_hero_title_line2", label: "Hero Title — Line 2 (highlighted)", type: "text", group: "Home — Hero", default: "Ready for the world." },
+  { key: "home_hero_subtitle", label: "Hero Subtitle", type: "textarea", group: "Home — Hero", default: "PVM International Academy blends a rigorous CBSE-aligned curriculum with a genuinely global outlook — small classes, real mentorship, and a campus built for how children actually learn." },
+  { key: "home_stat_years", label: "Stat: Years of Excellence", type: "text", group: "Home — Hero", default: "15" },
+  { key: "home_stat_faculty", label: "Stat: Expert Faculty", type: "text", group: "Home — Hero", default: "60" },
+  { key: "home_stat_students", label: "Stat: Students", type: "text", group: "Home — Hero", default: "1200" },
+  { key: "home_stat_countries", label: "Stat: Countries Represented", type: "text", group: "Home — Hero", default: "12" },
+
+  // ---------- HOME — ABOUT TEASER ----------
+  { key: "home_about_heading", label: "About Teaser — Heading", type: "text", group: "Home — About Teaser", default: "A school that takes childhood as seriously as achievement" },
+  { key: "home_about_text", label: "About Teaser — Paragraph", type: "textarea", group: "Home — About Teaser", default: "Every classroom at PVM is designed around the same question: what does this child need to thrive, ten years from now? That means strong fundamentals, hands-on learning, and teachers who know each student by name — not just by roll number." },
+  { key: "home_about_image", label: "About Teaser — Photo", type: "image", group: "Home — About Teaser", default: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80" },
+
+  // ---------- HOME — PROGRAM CARDS ----------
+  { key: "home_prog1_image", label: "Program Card 1 — Photo (Early Years)", type: "image", group: "Home — Program Cards", default: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80" },
+  { key: "home_prog1_title", label: "Program Card 1 — Title", type: "text", group: "Home — Program Cards", default: "Early Years" },
+  { key: "home_prog1_desc", label: "Program Card 1 — Description", type: "textarea", group: "Home — Program Cards", default: "Play-based learning that builds language, motor skills and curiosity." },
+  { key: "home_prog2_image", label: "Program Card 2 — Photo (Primary)", type: "image", group: "Home — Program Cards", default: "https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=500&q=80" },
+  { key: "home_prog2_title", label: "Program Card 2 — Title", type: "text", group: "Home — Program Cards", default: "Primary School" },
+  { key: "home_prog2_desc", label: "Program Card 2 — Description", type: "textarea", group: "Home — Program Cards", default: "Strong fundamentals in literacy, numeracy and inquiry-based science." },
+  { key: "home_prog3_image", label: "Program Card 3 — Photo (Middle)", type: "image", group: "Home — Program Cards", default: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&q=80" },
+  { key: "home_prog3_title", label: "Program Card 3 — Title", type: "text", group: "Home — Program Cards", default: "Middle School" },
+  { key: "home_prog3_desc", label: "Program Card 3 — Description", type: "textarea", group: "Home — Program Cards", default: "Subject specialisation begins, alongside sport, art and design labs." },
+  { key: "home_prog4_image", label: "Program Card 4 — Photo (Secondary)", type: "image", group: "Home — Program Cards", default: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500&q=80" },
+  { key: "home_prog4_title", label: "Program Card 4 — Title", type: "text", group: "Home — Program Cards", default: "Secondary School" },
+  { key: "home_prog4_desc", label: "Program Card 4 — Description", type: "textarea", group: "Home — Program Cards", default: "Focused board-exam preparation with dedicated mentoring through Grade 10." },
+
+  // ---------- HOME — WHY US ----------
+  { key: "home_why1_title", label: "Why Us Card 1 — Title", type: "text", group: "Home — Why Choose Us", default: "Low student-teacher ratio" },
+  { key: "home_why1_desc", label: "Why Us Card 1 — Description", type: "textarea", group: "Home — Why Choose Us", default: "Capped at 1:18, so no child is a face in the crowd." },
+  { key: "home_why2_title", label: "Why Us Card 2 — Title", type: "text", group: "Home — Why Choose Us", default: "Global exposure" },
+  { key: "home_why2_desc", label: "Why Us Card 2 — Description", type: "textarea", group: "Home — Why Choose Us", default: "Exchange programs, Model UN, and an international pen-pal network." },
+  { key: "home_why3_title", label: "Why Us Card 3 — Title", type: "text", group: "Home — Why Choose Us", default: "Beyond the classroom" },
+  { key: "home_why3_desc", label: "Why Us Card 3 — Description", type: "textarea", group: "Home — Why Choose Us", default: "40+ clubs spanning robotics, debate, music and competitive sport." },
+
+  // ---------- ABOUT PAGE ----------
+  { key: "about_founded_year", label: "Year Founded", type: "text", group: "About Page", default: "2010" },
+  { key: "about_campus_photo", label: "Overview — Campus Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80" },
+  { key: "about_founder_photo", label: "Chairman Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&q=80" },
+  { key: "about_founder_name", label: "Chairman Name", type: "text", group: "About Page", default: "[Chairman's Name]" },
+  { key: "about_founder_quote", label: "Chairman Quote", type: "textarea", group: "About Page", default: "I started PVM because I believed Bengaluru needed a school where academic ambition and genuine care for each child could exist in the same building." },
+  { key: "about_principal_photo", label: "Principal Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=700&q=80" },
+  { key: "about_principal_name", label: "Principal Name", type: "text", group: "About Page", default: "[Principal's Name]" },
+  { key: "about_principal_quote", label: "Principal Quote", type: "textarea", group: "About Page", default: "Every child who walks through our gates deserves teachers who notice them — their strengths, their struggles, and everything in between." },
+  { key: "about_trustee_name", label: "Managing Trustee Name", type: "text", group: "About Page", default: "[Trustee's Name]" },
+  { key: "about_trustee_photo", label: "Managing Trustee Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=500&q=80" },
+  { key: "about_director_name", label: "Director of Academics Name", type: "text", group: "About Page", default: "[Director's Name]" },
+  { key: "about_director_photo", label: "Director Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" },
+  { key: "about_vp_name", label: "Vice Principal Name", type: "text", group: "About Page", default: "[Name]" },
+  { key: "about_vp_photo", label: "Vice Principal Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&q=80" },
+
+  // ---------- ACADEMICS PAGE ----------
+  { key: "academics_early_years_desc", label: "Early Years — Description", type: "textarea", group: "Academics Page", default: "Play-based, sensory-rich learning that develops language, motor skills, and early social confidence." },
+  { key: "academics_primary_desc", label: "Primary School — Description", type: "textarea", group: "Academics Page", default: "Core literacy and numeracy taught alongside EVS, art and inquiry-based science." },
+  { key: "academics_middle_desc", label: "Middle School — Description", type: "textarea", group: "Academics Page", default: "Subjects specialise, computer science and a second language are introduced." },
+  { key: "academics_secondary_desc", label: "Secondary School — Description", type: "textarea", group: "Academics Page", default: "Focused board-exam preparation across all core subjects, backed by dedicated mentoring." },
+
+  // ---------- CAMPUS LIFE PAGE ----------
+  { key: "campus_infra_image", label: "Infrastructure — Photo", type: "image", group: "Campus Life Page", default: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=500&q=80" },
+  { key: "campus_infra_desc", label: "Infrastructure — Description", type: "textarea", group: "Campus Life Page", default: "Spacious classrooms, wide corridors and a safe, well-maintained campus." },
+  { key: "campus_library_image", label: "Library — Photo", type: "image", group: "Campus Life Page", default: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=500&q=80" },
+  { key: "campus_library_desc", label: "Library — Description", type: "textarea", group: "Campus Life Page", default: "A growing collection across fiction, reference and periodicals, with a quiet reading room." },
+  { key: "campus_transport_image", label: "Transport — Photo", type: "image", group: "Campus Life Page", default: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=500&q=80" },
+  { key: "campus_transport_desc", label: "Transport — Description", type: "textarea", group: "Campus Life Page", default: "GPS-tracked school buses covering major routes across the city." },
+  { key: "campus_scilab_image", label: "Science Lab — Photo", type: "image", group: "Campus Life Page", default: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=500&q=80" },
+  { key: "campus_scilab_desc", label: "Science Lab — Description", type: "textarea", group: "Campus Life Page", default: "Fully equipped physics, chemistry and biology labs for hands-on learning." },
+  { key: "campus_complab_image", label: "Computer Lab — Photo", type: "image", group: "Campus Life Page", default: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80" },
+  { key: "campus_complab_desc", label: "Computer Lab — Description", type: "textarea", group: "Campus Life Page", default: "Modern systems supporting computer science and coding classes." },
+  { key: "campus_playground_image", label: "Playground — Photo", type: "image", group: "Campus Life Page", default: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=500&q=80" },
+  { key: "campus_playground_desc", label: "Playground — Description", type: "textarea", group: "Campus Life Page", default: "Open grounds for athletics, football and everyday outdoor play." },
+
+  // ---------- FACULTY PAGE ----------
+  { key: "faculty_principal_photo", label: "Principal Photo", type: "image", group: "Faculty Page", default: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=500&q=80" },
+  { key: "faculty_principal_name", label: "Principal Name", type: "text", group: "Faculty Page", default: "[Principal's Name]" },
+  { key: "faculty_vp_photo", label: "Vice Principal Photo", type: "image", group: "Faculty Page", default: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&q=80" },
+  { key: "faculty_vp_name", label: "Vice Principal Name", type: "text", group: "Faculty Page", default: "[Name]" },
+  { key: "faculty_director_photo", label: "Director Photo", type: "image", group: "Faculty Page", default: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" },
+  { key: "faculty_director_name", label: "Director Name", type: "text", group: "Faculty Page", default: "[Name]" },
+  { key: "faculty_science_photo", label: "Science HOD Photo", type: "image", group: "Faculty Page", default: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80" },
+  { key: "faculty_science_name", label: "Science HOD Name", type: "text", group: "Faculty Page", default: "[Name]" },
+  { key: "faculty_math_photo", label: "Mathematics HOD Photo", type: "image", group: "Faculty Page", default: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&q=80" },
+  { key: "faculty_math_name", label: "Mathematics HOD Name", type: "text", group: "Faculty Page", default: "[Name]" },
+  { key: "faculty_english_photo", label: "English HOD Photo", type: "image", group: "Faculty Page", default: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" },
+  { key: "faculty_english_name", label: "English HOD Name", type: "text", group: "Faculty Page", default: "[Name]" },
+  { key: "faculty_sports_photo", label: "Sports HOD Photo", type: "image", group: "Faculty Page", default: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&q=80" },
+  { key: "faculty_sports_name", label: "Sports HOD Name", type: "text", group: "Faculty Page", default: "[Name]" },
+  
+  // ---------- STAGE PAGES ---------
+  { key: "stage_ey_hero_image", label: "Early Years — Hero Photo", type: "image", group: "Stage Pages — Early Years", default: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80" },
+  { key: "stage_ey_intro", label: "Early Years — Intro Paragraph", type: "textarea", group: "Stage Pages — Early Years", default: "Our Early Years program (Pre-KG & KG) is built around play-based, sensory-rich learning. Children explore language, numbers, motor skills and social confidence through stories, music, and guided play — not worksheets." },
+  { key: "stage_ey_highlight1_title", label: "Early Years — Highlight 1 Title", type: "text", group: "Stage Pages — Early Years", default: "Play-Based Learning" },
+  { key: "stage_ey_highlight1_desc", label: "Early Years — Highlight 1 Description", type: "textarea", group: "Stage Pages — Early Years", default: "Structured play that builds language, coordination and curiosity." },
+  { key: "stage_ey_highlight2_title", label: "Early Years — Highlight 2 Title", type: "text", group: "Stage Pages — Early Years", default: "Social Confidence" },
+  { key: "stage_ey_highlight2_desc", label: "Early Years — Highlight 2 Description", type: "textarea", group: "Stage Pages — Early Years", default: "Circle time and group activities build early social skills." },
+  { key: "stage_ey_highlight3_title", label: "Early Years — Highlight 3 Title", type: "text", group: "Stage Pages — Early Years", default: "Caring Teachers" },
+  { key: "stage_ey_highlight3_desc", label: "Early Years — Highlight 3 Description", type: "textarea", group: "Stage Pages — Early Years", default: "Low ratios so every child gets individual attention." },
+
+  { key: "stage_primary_hero_image", label: "Primary School — Hero Photo", type: "image", group: "Stage Pages — Primary School", default: "https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=1200&q=80" },
+  { key: "stage_primary_intro", label: "Primary School — Intro Paragraph", type: "textarea", group: "Stage Pages — Primary School", default: "Grades 1–5 build strong fundamentals in literacy, numeracy and science — through continuous, low-pressure assessment rather than one high-stakes exam." },
+  { key: "stage_primary_highlight1_title", label: "Primary — Highlight 1 Title", type: "text", group: "Stage Pages — Primary School", default: "Strong Fundamentals" },
+  { key: "stage_primary_highlight1_desc", label: "Primary — Highlight 1 Description", type: "textarea", group: "Stage Pages — Primary School", default: "Literacy and numeracy taught with real-world context." },
+  { key: "stage_primary_highlight2_title", label: "Primary — Highlight 2 Title", type: "text", group: "Stage Pages — Primary School", default: "Inquiry-Based Science" },
+  { key: "stage_primary_highlight2_desc", label: "Primary — Highlight 2 Description", type: "textarea", group: "Stage Pages — Primary School", default: "Hands-on experiments that build curiosity, not memorisation." },
+  { key: "stage_primary_highlight3_title", label: "Primary — Highlight 3 Title", type: "text", group: "Stage Pages — Primary School", default: "Continuous Assessment" },
+  { key: "stage_primary_highlight3_desc", label: "Primary — Highlight 3 Description", type: "textarea", group: "Stage Pages — Primary School", default: "Regular feedback instead of one big exam." },
+
+  { key: "stage_middle_hero_image", label: "Middle School — Hero Photo", type: "image", group: "Stage Pages — Middle School", default: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80" },
+  { key: "stage_middle_intro", label: "Middle School — Intro Paragraph", type: "textarea", group: "Stage Pages — Middle School", default: "Grades 6–8 introduce subject specialisation, computer science, and a second language — alongside sport, art and design labs where students choose their first electives." },
+  { key: "stage_middle_highlight1_title", label: "Middle — Highlight 1 Title", type: "text", group: "Stage Pages — Middle School", default: "Subject Specialisation" },
+  { key: "stage_middle_highlight1_desc", label: "Middle — Highlight 1 Description", type: "textarea", group: "Stage Pages — Middle School", default: "Dedicated subject teachers for each core discipline." },
+  { key: "stage_middle_highlight2_title", label: "Middle — Highlight 2 Title", type: "text", group: "Stage Pages — Middle School", default: "Electives Begin" },
+  { key: "stage_middle_highlight2_desc", label: "Middle — Highlight 2 Description", type: "textarea", group: "Stage Pages — Middle School", default: "Robotics, art or music — students pick their first electives." },
+  { key: "stage_middle_highlight3_title", label: "Middle — Highlight 3 Title", type: "text", group: "Stage Pages — Middle School", default: "Second Language" },
+  { key: "stage_middle_highlight3_desc", label: "Middle — Highlight 3 Description", type: "textarea", group: "Stage Pages — Middle School", default: "A second language is introduced alongside core subjects." },
+
+  { key: "stage_secondary_hero_image", label: "Secondary School — Hero Photo", type: "image", group: "Stage Pages — Secondary School", default: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80" },
+  { key: "stage_secondary_intro", label: "Secondary School — Intro Paragraph", type: "textarea", group: "Stage Pages — Secondary School", default: "Grades 9–10 focus on rigorous board-exam preparation across all core subjects, backed by dedicated mentoring and continuous progress tracking." },
+  { key: "stage_secondary_highlight1_title", label: "Secondary — Highlight 1 Title", type: "text", group: "Stage Pages — Secondary School", default: "Board Exam Focus" },
+  { key: "stage_secondary_highlight1_desc", label: "Secondary — Highlight 1 Description", type: "textarea", group: "Stage Pages — Secondary School", default: "Structured preparation for Grade 10 board examinations." },
+  { key: "stage_secondary_highlight2_title", label: "Secondary — Highlight 2 Title", type: "text", group: "Stage Pages — Secondary School", default: "Dedicated Mentoring" },
+  { key: "stage_secondary_highlight2_desc", label: "Secondary — Highlight 2 Description", type: "textarea", group: "Stage Pages — Secondary School", default: "One-on-one academic mentoring for every student." },
+  { key: "stage_secondary_highlight3_title", label: "Secondary — Highlight 3 Title", type: "text", group: "Stage Pages — Secondary School", default: "Career Guidance" },
+  { key: "stage_secondary_highlight3_desc", label: "Secondary — Highlight 3 Description", type: "textarea", group: "Stage Pages — Secondary School", default: "Early guidance on stream and career choices ahead." },
+];
