@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       grid.innerHTML = `<div class="gallery-marquee-track" style="animation:none;">${itemsHtml}</div>`;
     }
+
+    if (typeof initLightbox === "function") initLightbox(data);
   } catch (err) {
     console.error(err);
     empty.textContent = "Gallery is warming up — please refresh in a moment.";
