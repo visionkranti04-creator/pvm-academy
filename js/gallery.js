@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       )
       .join("");
 
-    // Only duplicate for the seamless scroll loop once there are enough
-    // photos — with just 1-3 items, duplication just looks like a mistake.
-    if (data.length >= 4) {
+    if (grid.classList.contains("gallery-grid-full")) {
+      grid.innerHTML = `<div class="gallery-marquee-track">${itemsHtml}</div>`;
+    } else if (data.length >= 4) {
       grid.innerHTML = `<div class="gallery-marquee-track">${itemsHtml}${itemsHtml}</div>`;
     } else {
       grid.innerHTML = `<div class="gallery-marquee-track" style="animation:none;">${itemsHtml}</div>`;
