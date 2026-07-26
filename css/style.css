@@ -386,3 +386,8 @@ footer a:hover { color: var(--gold-soft); }
   font-size: 22px; line-height: 1; cursor: pointer; color: var(--ink-soft);
 }
 .admission-popup-close:hover { color: var(--navy); }
+/* ---------- Gallery: better mobile sizing ---------- */
+@media (max-width: 480px) {
+  .gallery-grid .g-item { flex: 0 0 160px; }
+  .gallery-marquee-track { gap: 10px; }
+}
