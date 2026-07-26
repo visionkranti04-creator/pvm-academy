@@ -371,3 +371,18 @@ footer a:hover { color: var(--gold-soft); }
   .about-card { padding: 20px; }
   .form-panel { padding: 22px; }
 } 
+/* ---------- Admission Enquiry Popup ---------- */
+#admission-popup-overlay {
+  position: fixed; inset: 0; background: rgba(14,21,96,0.75); z-index: 2000;
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+#admission-popup-overlay.show { display: flex; }
+.admission-popup-card {
+  background: var(--white); border-radius: 4px; max-width: 440px; width: 100%;
+  padding: 34px; position: relative; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4);
+}
+.admission-popup-close {
+  position: absolute; top: 14px; right: 16px; background: none; border: none;
+  font-size: 22px; line-height: 1; cursor: pointer; color: var(--ink-soft);
+}
+.admission-popup-close:hover { color: var(--navy); }
