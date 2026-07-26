@@ -250,5 +250,35 @@
 <script src="js/gallery.js"></script>
 <script src="js/content.js"></script>
 <script src="js/main.js"></script>
+<script src="js/admission-popup.js"></script>
+
+<!-- ADMISSION ENQUIRY POPUP -->
+<div id="admission-popup-overlay">
+  <div class="admission-popup-card">
+    <button id="admission-popup-close" class="admission-popup-close" aria-label="Close">✕</button>
+    <span class="eyebrow">Admissions Open — AY 2026-27</span>
+    <h2 style="margin-top:12px; font-size:24px;">Quick Admission Enquiry</h2>
+    <p style="color:var(--ink-soft); font-size:14.5px; margin-top:8px;">Share a few details and our admissions team will call you back.</p>
+    <form id="admission-popup-form" style="margin-top:20px;">
+      <div class="field"><label>Student's Name</label><input name="student_name" type="text" required /></div>
+      <div class="field"><label>Parent's Name</label><input name="parent_name" type="text" required /></div>
+      <div class="field"><label>Phone Number</label><input name="phone" type="tel" required /></div>
+      <div class="field">
+        <label>Grade Applying For</label>
+        <select name="grade_applying" required>
+          <option value="">Select grade</option>
+          <option>Pre-KG</option><option>KG</option>
+          <option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option>
+          <option>Grade 6</option><option>Grade 7</option><option>Grade 8</option>
+          <option>Grade 9</option><option>Grade 10</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Submit Enquiry</button>
+      <div class="form-status"></div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
 </body>
 </html>
