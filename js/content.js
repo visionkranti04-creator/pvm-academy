@@ -1,6 +1,16 @@
+// Loads editable text/image content from Supabase `content_blocks` table
+// and applies it to any element with a matching data-key attribute.
+// Example: <span data-key="about_founder_name">[Founder's Name]</span>
+// Example: <img data-key="about_founder_photo" src="...">
+// Example (video): <video data-key="home_hero_video"><source src="..."></video>
+// Example (animated stat): <span class="num" data-key="home_stat_years" data-count="15">0</span>
+
 document.addEventListener("DOMContentLoaded", async () => {
   const targets = document.querySelectorAll("[data-key]");
-  if (!targets.length) return;
+  if (!targets.length) {
+    document.dispatchEvent(new Event("content-ready"));
+    return;
+  }
 
   try {
     const { data, error } = await supabaseClient.from("content_blocks").select("*");
@@ -13,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     targets.forEach((el) => {
       const key = el.dataset.key;
-      if (!(key in map) || !map[key]) return;
+      if (!(key in map) || !map[key]) return; // keep placeholder text/image until admin sets one
 
       if (el.tagName === "IMG") {
         el.src = map[key];
@@ -31,5 +41,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   } catch (err) {
     console.error("Content load failed:", err);
+  } finally {
+    // Tell main.js it's now safe to animate stat counters with the
+    // real (possibly Supabase-updated) numbers, not the HTML defaults.
+    document.dispatchEvent(new Event("content-ready"));
   }
 });

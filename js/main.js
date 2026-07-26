@@ -33,31 +33,45 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     revealEls.forEach((el) => el.classList.add("in"));
   }
-
-  // Animated stat counters
-  const stats = document.querySelectorAll(".stat .num[data-count]");
-  if ("IntersectionObserver" in window && stats.length) {
-    const statObs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const target = parseInt(el.dataset.count, 10);
-          const suffix = el.dataset.suffix || "";
-          const duration = 1200;
-          const start = performance.now();
-          function tick(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            el.textContent = Math.floor(progress * target) + suffix;
-            if (progress < 1) requestAnimationFrame(tick);
-            else el.textContent = target + suffix;
-          }
-          requestAnimationFrame(tick);
-          statObs.unobserve(el);
-        });
-      },
-      { threshold: 0.4 }
-    );
-    stats.forEach((el) => statObs.observe(el));
-  }
 });
+
+// Animated stat counters — deliberately wait for content.js to finish
+// applying any Supabase-saved numbers first, so we never animate from
+// the HTML's default placeholder value by mistake.
+function initStatCounters() {
+  const stats = document.querySelectorAll(".stat .num[data-count]");
+  if (!("IntersectionObserver" in window) || !stats.length) return;
+
+  const statObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || "";
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          el.textContent = Math.floor(progress * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(tick);
+        statObs.unobserve(el);
+      });
+    },
+    { threshold: 0.4 }
+  );
+  stats.forEach((el) => statObs.observe(el));
+}
+
+// content.js dispatches "content-ready" once it's done fetching/applying
+// Supabase data (success or failure). Wait for that signal specifically
+// for the counters. Fallback timeout in case content.js isn't on this page.
+document.addEventListener("content-ready", initStatCounters);
+setTimeout(() => {
+  const stats = document.querySelectorAll(".stat .num[data-count]");
+  const alreadyStarted = Array.from(stats).some((el) => el.textContent !== "0");
+  if (stats.length && !alreadyStarted) initStatCounters();
+}, 2000);
