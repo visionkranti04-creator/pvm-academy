@@ -5,14 +5,33 @@
 let cropperInstance = null;
 let cropCallback = null;
 
-function openCropper(file, callback) {
+async function openCropper(file, callback) {
   cropCallback = callback;
   const modal = document.getElementById("crop-modal");
   const imgEl = document.getElementById("crop-image-el");
   if (!modal || !imgEl) {
-    // Cropper UI not present on this page — just pass the original file through
     callback(file);
     return;
+  }
+
+  // iPhone photos are often saved as HEIC, which browsers can't display
+  // directly in an <img> tag. Convert to JPEG first if needed.
+  const isHeic =
+    file.type === "image/heic" ||
+    file.type === "image/heif" ||
+    /\.(heic|heif)$/i.test(file.name);
+
+  let workingFile = file;
+  if (isHeic && typeof heic2any === "function") {
+    try {
+      const convertedBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
+      const blobToUse = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
+      workingFile = new File([blobToUse], file.name.replace(/\.(heic|heif)$/i, ".jpg"), { type: "image/jpeg" });
+    } catch (err) {
+      console.error("HEIC conversion failed:", err);
+      alert("Couldn't read this iPhone photo format. Please try a JPG or PNG instead.");
+      return;
+    }
   }
 
   const reader = new FileReader();
@@ -26,7 +45,7 @@ function openCropper(file, callback) {
       aspectRatio: NaN, // starts free — user picks a ratio button if they want one
     });
   };
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(workingFile);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -73,7 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isPhotoField) return;
 
     const file = el.files && el.files[0];
-    if (!file || !file.type.startsWith("image/")) return; // skip videos — no cropping needed
+    if (!file) return;
+    const looksLikePhoto = file.type.startsWith("image/") || /\.(heic|heif)$/i.test(file.name);
+    if (!looksLikePhoto) return; // skip videos — no cropping needed
 
     openCropper(file, (blob) => {
       const croppedFile = new File([blob], file.name.replace(/\.[^.]+$/, ".jpg"), { type: "image/jpeg" });
