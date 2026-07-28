@@ -450,3 +450,16 @@ footer a:hover { color: var(--gold-soft); }
 /* ---------- Prevent flash of placeholder content before real data loads ---------- */
 body { opacity: 0; transition: opacity 0.25s ease; }
 body.loaded { opacity: 1; }
+/* ---------- Topbar: better spacing so it doesn't get squeezed ---------- */
+.topbar { padding: 6px 0; }
+.topbar .container {
+  height: auto; min-height: 36px; flex-wrap: wrap; row-gap: 6px; padding: 4px 24px;
+}
+.topbar-social a { width: 24px; height: 24px; font-size: 13px; flex-shrink: 0; }
+@media (max-width: 900px) {
+  .topbar .tb-left { flex-wrap: wrap; row-gap: 6px; }
+  .topbar .container { justify-content: center; text-align: center; }
+}
+@media (max-width: 560px) {
+  .topbar .tb-left:first-child span { display: block; width: 100%; text-align: center; }
+}
