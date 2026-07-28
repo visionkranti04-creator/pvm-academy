@@ -63,7 +63,7 @@ function mediaHtml(url, caption) {
   if (ytId) {
     return `<iframe src="https://www.youtube.com/embed/${ytId}" style="width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>`;
   } else if (url && url.match(/\.mp4($|\?)/i)) {
-    return `<video src="${url}" style="width:100%;height:100%;object-fit:cover;" muted loop playsinline controls></video>`;
+    return `<video src="${url}" style="width:100%;height:100%;object-fit:cover;" muted loop playsinline controls preload="none"></video>`;
   } else {
     return `<img src="${url}" alt="${escapeHtml(caption || "Academy photo")}" loading="lazy" />`;
   }
