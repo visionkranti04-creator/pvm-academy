@@ -492,3 +492,17 @@ body.loaded { opacity: 1; }
   .whatsapp-float { width: 48px; height: 48px; bottom: 18px; right: 18px; }
   .whatsapp-float i { font-size: 24px; }
 }
+/* ---------- Floating Instagram button (stacked above WhatsApp) ---------- */
+.instagram-float {
+  position: fixed; bottom: 92px; right: 24px; z-index: 1500;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35); transition: transform .2s ease;
+}
+.instagram-float:hover { transform: scale(1.08); }
+.instagram-float i { color: #fff; font-size: 26px; }
+@media (max-width: 560px) {
+  .instagram-float { width: 48px; height: 48px; bottom: 74px; right: 18px; }
+  .instagram-float i { font-size: 22px; }
+}
