@@ -479,3 +479,16 @@ body.loaded { opacity: 1; }
 .topbar-social { display: inline-flex; gap: 10px; margin-left: 14px; }
 .topbar-social a { font-size: 16px; line-height: 1; }
 .topbar-social a i { font-size: 14px; }
+/* ---------- Floating WhatsApp button (always visible, bottom-right) ---------- */
+.whatsapp-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 1500;
+  width: 56px; height: 56px; border-radius: 50%; background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35); transition: transform .2s ease;
+}
+.whatsapp-float:hover { transform: scale(1.08); }
+.whatsapp-float i { color: #fff; font-size: 28px; }
+@media (max-width: 560px) {
+  .whatsapp-float { width: 48px; height: 48px; bottom: 18px; right: 18px; }
+  .whatsapp-float i { font-size: 24px; }
+}
