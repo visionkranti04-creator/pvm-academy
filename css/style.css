@@ -463,3 +463,15 @@ body.loaded { opacity: 1; }
 @media (max-width: 560px) {
   .topbar .tb-left:first-child span { display: block; width: 100%; text-align: center; }
 }
+/* ---------- Topbar social icons: bigger and more visible ---------- */
+.topbar-social a {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 16px !important;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid var(--gold-soft) !important;
+  color: var(--gold-soft);
+  font-weight: 700;
+}
+.topbar-social a:hover { background: var(--gold-soft); color: var(--navy-deep); }
+.topbar-social { gap: 10px !important; }
