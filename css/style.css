@@ -393,14 +393,14 @@ footer a:hover { color: var(--gold-soft); }
 }
 /* ---------- Gallery: swipeable on mobile/tablet instead of auto-scroll ---------- */
 @media (max-width: 768px) {
-  .gallery-marquee-track { animation: none !important; }
   .gallery-grid {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding-bottom: 4px; /* room for scrollbar on some devices */
+    padding-bottom: 4px;
   }
   .gallery-grid .g-item { scroll-snap-align: start; }
+  .gallery-marquee-track.user-paused { animation-play-state: paused; }
 }
 /* ---------- Gallery: full grid mode for the dedicated Gallery page ---------- */
 .gallery-grid.gallery-grid-full {
