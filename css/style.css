@@ -475,3 +475,6 @@ body.loaded { opacity: 1; }
 }
 .topbar-social a:hover { background: var(--gold-soft); color: var(--navy-deep); }
 .topbar-social { gap: 10px !important; }
+/* ---------- Topbar social icons: emoji, next to phone numbers ---------- */
+.topbar-social { display: inline-flex; gap: 10px; margin-left: 14px; }
+.topbar-social a { font-size: 16px; line-height: 1; }
