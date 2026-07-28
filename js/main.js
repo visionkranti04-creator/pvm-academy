@@ -75,26 +75,41 @@ setTimeout(() => {
   const alreadyStarted = Array.from(stats).some((el) => el.textContent !== "0");
   if (stats.length && !alreadyStarted) initStatCounters();
 }, 2000);
-// Gallery: keep auto-scrolling, but pause briefly whenever someone
-// touches/swipes it, then resume after they let go.
+// Gallery on mobile: drive the auto-scroll with JavaScript directly
+// (instead of a CSS animation), so it never fights with your finger's
+// native swipe — this is what was causing the flash/jump glitch.
 document.addEventListener("DOMContentLoaded", () => {
-  let resumeTimer;
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  if (!isMobile) return;
+
   document.querySelectorAll(".gallery-grid").forEach((grid) => {
-    const pause = () => {
-      const track = grid.querySelector(".gallery-marquee-track");
-      if (track) track.classList.add("user-paused");
-      clearTimeout(resumeTimer);
-    };
-    const scheduleResume = () => {
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => {
-        const track = grid.querySelector(".gallery-marquee-track");
-        if (track) track.classList.remove("user-paused");
-      }, 2000);
-    };
-    grid.addEventListener("touchstart", pause, { passive: true });
-    grid.addEventListener("touchend", scheduleResume);
-    grid.addEventListener("mousedown", pause);
-    grid.addEventListener("mouseup", scheduleResume);
+    const track = grid.querySelector(".gallery-marquee-track");
+    if (!track) return;
+
+    let autoScroll = true;
+    let resumeTimer;
+
+    function step() {
+      if (autoScroll && grid.scrollWidth > grid.clientWidth) {
+        grid.scrollLeft += 0.6;
+        if (grid.scrollLeft >= track.scrollWidth - grid.clientWidth - 1) {
+          grid.scrollLeft = 0;
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+
+    grid.addEventListener(
+      "touchstart",
+      () => {
+        autoScroll = false;
+        clearTimeout(resumeTimer);
+      },
+      { passive: true }
+    );
+    grid.addEventListener("touchend", () => {
+      resumeTimer = setTimeout(() => (autoScroll = true), 2500);
+    });
   });
 });

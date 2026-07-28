@@ -400,7 +400,7 @@ footer a:hover { color: var(--gold-soft); }
     padding-bottom: 4px;
   }
   .gallery-grid .g-item { scroll-snap-align: start; }
-  .gallery-marquee-track.user-paused { animation-play-state: paused; }
+  .gallery-marquee-track { animation: none !important; }
 }
 /* ---------- Gallery: full grid mode for the dedicated Gallery page ---------- */
 .gallery-grid.gallery-grid-full {
