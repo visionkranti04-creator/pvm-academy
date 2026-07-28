@@ -1,16 +1,17 @@
 // Loads editable text/image content from Supabase `content_blocks` table
 // and applies it to any element with a matching data-key attribute.
+// Also handles data-link-key elements (updates just the href, leaving
+// the icon/text inside untouched) — used for social media links.
 // Also hides the page briefly and fades it in once real content is
 // loaded, so visitors never see the placeholder defaults flash by.
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Safety net: reveal the page after 2.5s no matter what, in case
-  // something goes wrong with the fetch — better a late flash than a
-  // permanently blank page.
   const safetyTimer = setTimeout(() => document.body.classList.add("loaded"), 2500);
 
   const targets = document.querySelectorAll("[data-key]");
-  if (!targets.length) {
+  const linkTargets = document.querySelectorAll("[data-link-key]");
+
+  if (!targets.length && !linkTargets.length) {
     clearTimeout(safetyTimer);
     document.body.classList.add("loaded");
     document.dispatchEvent(new Event("content-ready"));
@@ -49,6 +50,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else {
         el.textContent = map[key];
       }
+    });
+
+    // Social/external links — only swap the href, keep the icon/text as-is
+    linkTargets.forEach((el) => {
+      const key = el.dataset.linkKey;
+      if (!(key in map) || !map[key]) return;
+      el.href = map[key];
     });
   } catch (err) {
     console.error("Content load failed:", err);

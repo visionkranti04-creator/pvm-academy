@@ -144,4 +144,8 @@ const CONTENT_FIELDS = [
   { key: "about_secretary_name", label: "Secretary Name", type: "text", group: "About Page", default: "[Secretary's Name]" },
   { key: "about_secretary_quote", label: "Secretary Quote", type: "textarea", group: "About Page", default: "A short message from the Secretary about the academy." },
   { key: "about_director_quote", label: "Director Quote", type: "textarea", group: "About Page", default: "A short message from the Director about the academy." },
+  // ---------- SOCIAL LINKS ----------
+  { key: "social_facebook_url", label: "Facebook Page URL", type: "text", group: "Global — Contact Info", default: "https://facebook.com" },
+  { key: "social_instagram_url", label: "Instagram Profile URL", type: "text", group: "Global — Contact Info", default: "https://instagram.com" },
+  { key: "social_whatsapp_url", label: "WhatsApp Link (e.g. https://wa.me/919999999999)", type: "text", group: "Global — Contact Info", default: "https://wa.me/919999999999" },
 ];
