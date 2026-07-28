@@ -4,6 +4,7 @@
 // Example: <img data-key="about_founder_photo" src="...">
 // Example (video): <video data-key="home_hero_video"><source src="..."></video>
 // Example (animated stat): <span class="num" data-key="home_stat_years" data-count="15">0</span>
+// Example (phone link): <a href="tel:+919999999999" data-key="site_phone">+91 99999 99999</a>
 
 document.addEventListener("DOMContentLoaded", async () => {
   const targets = document.querySelectorAll("[data-key]");
@@ -35,6 +36,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       } else if (el.hasAttribute("data-count")) {
         el.setAttribute("data-count", map[key]);
+      } else if (el.tagName === "A" && (el.getAttribute("href") || "").startsWith("tel:")) {
+        // Phone links: update both the visible text AND the actual dial number
+        el.textContent = map[key];
+        el.href = "tel:" + map[key].replace(/[^0-9+]/g, "");
+      } else if (el.tagName === "A" && (el.getAttribute("href") || "").startsWith("mailto:")) {
+        // Email links: update both the visible text AND the actual mailto address
+        el.textContent = map[key];
+        el.href = "mailto:" + map[key];
       } else {
         el.textContent = map[key];
       }
