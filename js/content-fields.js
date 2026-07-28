@@ -137,4 +137,5 @@ const CONTENT_FIELDS = [
   { key: "stage_secondary_highlight2_desc", label: "Secondary — Highlight 2 Description", type: "textarea", group: "Stage Pages — Secondary School", default: "One-on-one academic mentoring for every student." },
   { key: "stage_secondary_highlight3_title", label: "Secondary — Highlight 3 Title", type: "text", group: "Stage Pages — Secondary School", default: "Career Guidance" },
   { key: "stage_secondary_highlight3_desc", label: "Secondary — Highlight 3 Description", type: "textarea", group: "Stage Pages — Secondary School", default: "Early guidance on stream and career choices ahead." },
+  { key: "site_phone_2", label: "Second Phone Number", type: "text", group: "Global — Contact Info", default: "+91 98888 88888" },
 ];
