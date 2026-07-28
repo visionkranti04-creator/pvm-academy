@@ -98,21 +98,3 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.addEventListener("mouseup", scheduleResume);
   });
 });
-// Performance: pause the gallery's auto-scroll animation whenever it
-// scrolls out of view, so it's not silently costing CPU/battery in the
-// background while someone reads a different part of the page.
-document.addEventListener("DOMContentLoaded", () => {
-  if (!("IntersectionObserver" in window)) return;
-  const galleryObs = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const track = entry.target.querySelector(".gallery-marquee-track");
-        if (!track) return;
-        if (entry.isIntersecting) track.classList.remove("paused-offscreen");
-        else track.classList.add("paused-offscreen");
-      });
-    },
-    { threshold: 0.05 }
-  );
-  document.querySelectorAll(".gallery-grid").forEach((grid) => galleryObs.observe(grid));
-});

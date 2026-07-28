@@ -506,6 +506,3 @@ body.loaded { opacity: 1; }
   .instagram-float { width: 48px; height: 48px; bottom: 74px; right: 18px; }
   .instagram-float i { font-size: 22px; }
 }
-/* ---------- Gallery performance: only animate what's on screen ---------- */
-.gallery-marquee-track { will-change: transform; }
-.gallery-marquee-track.paused-offscreen { animation-play-state: paused; }
