@@ -1,14 +1,18 @@
 // Loads editable text/image content from Supabase `content_blocks` table
 // and applies it to any element with a matching data-key attribute.
-// Example: <span data-key="about_founder_name">[Founder's Name]</span>
-// Example: <img data-key="about_founder_photo" src="...">
-// Example (video): <video data-key="home_hero_video"><source src="..."></video>
-// Example (animated stat): <span class="num" data-key="home_stat_years" data-count="15">0</span>
-// Example (phone link): <a href="tel:+919999999999" data-key="site_phone">+91 99999 99999</a>
+// Also hides the page briefly and fades it in once real content is
+// loaded, so visitors never see the placeholder defaults flash by.
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // Safety net: reveal the page after 2.5s no matter what, in case
+  // something goes wrong with the fetch — better a late flash than a
+  // permanently blank page.
+  const safetyTimer = setTimeout(() => document.body.classList.add("loaded"), 2500);
+
   const targets = document.querySelectorAll("[data-key]");
   if (!targets.length) {
+    clearTimeout(safetyTimer);
+    document.body.classList.add("loaded");
     document.dispatchEvent(new Event("content-ready"));
     return;
   }
@@ -37,11 +41,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else if (el.hasAttribute("data-count")) {
         el.setAttribute("data-count", map[key]);
       } else if (el.tagName === "A" && (el.getAttribute("href") || "").startsWith("tel:")) {
-        // Phone links: update both the visible text AND the actual dial number
         el.textContent = map[key];
         el.href = "tel:" + map[key].replace(/[^0-9+]/g, "");
       } else if (el.tagName === "A" && (el.getAttribute("href") || "").startsWith("mailto:")) {
-        // Email links: update both the visible text AND the actual mailto address
         el.textContent = map[key];
         el.href = "mailto:" + map[key];
       } else {
@@ -51,8 +53,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.error("Content load failed:", err);
   } finally {
-    // Tell main.js it's now safe to animate stat counters with the
-    // real (possibly Supabase-updated) numbers, not the HTML defaults.
+    clearTimeout(safetyTimer);
+    document.body.classList.add("loaded");
     document.dispatchEvent(new Event("content-ready"));
   }
 });

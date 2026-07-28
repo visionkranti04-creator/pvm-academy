@@ -447,3 +447,6 @@ footer a:hover { color: var(--gold-soft); }
 @media (max-width: 640px) {
   .lightbox-nav { width: 40px; height: 40px; font-size: 22px; }
 }
+/* ---------- Prevent flash of placeholder content before real data loads ---------- */
+body { opacity: 0; transition: opacity 0.25s ease; }
+body.loaded { opacity: 1; }
