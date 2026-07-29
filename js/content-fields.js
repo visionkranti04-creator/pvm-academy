@@ -152,4 +152,5 @@ const CONTENT_FIELDS = [
   { key: "social_facebook_url", label: "Facebook Page URL", type: "text", group: "Global — Contact Info", default: "https://facebook.com" },
   { key: "social_instagram_url", label: "Instagram Profile URL", type: "text", group: "Global — Contact Info", default: "https://instagram.com" },
   { key: "social_whatsapp_url", label: "WhatsApp Link (e.g. https://wa.me/919999999999)", type: "text", group: "Global — Contact Info", default: "https://wa.me/919999999999" },
+  { key: "site_phone_3", label: "Third Phone Number", type: "text", group: "Global — Contact Info", default: "+91 97777 77777" },
 ];
