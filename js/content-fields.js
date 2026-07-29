@@ -49,7 +49,7 @@ const CONTENT_FIELDS = [
   { key: "home_why3_title", label: "Why Us Card 3 — Title", type: "text", group: "Home — Why Choose Us", default: "Beyond the classroom" },
   { key: "home_why3_desc", label: "Why Us Card 3 — Description", type: "textarea", group: "Home — Why Choose Us", default: "40+ clubs spanning robotics, debate, music and competitive sport." },
 
-  // ---------- ABOUT PAGE ----------
+ // ---------- ABOUT PAGE ----------
   { key: "about_founded_year", label: "Year Founded", type: "text", group: "About Page", default: "2010" },
   { key: "about_campus_photo", label: "Overview — Campus Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80" },
   { key: "about_founder_photo", label: "Chairman Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&q=80" },
@@ -61,13 +61,9 @@ const CONTENT_FIELDS = [
   { key: "about_secretary_photo", label: "Secretary Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&q=80" },
   { key: "about_secretary_name", label: "Secretary Name", type: "text", group: "About Page", default: "[Secretary's Name]" },
   { key: "about_secretary_quote", label: "Secretary Quote", type: "textarea", group: "About Page", default: "A short message from the Secretary about the academy." },
-  { key: "about_director_quote", label: "Director Quote", type: "textarea", group: "About Page", default: "A short message from the Director about the academy." },
-  { key: "about_trustee_name", label: "Managing Trustee Name", type: "text", group: "About Page", default: "[Trustee's Name]" },
-  { key: "about_trustee_photo", label: "Managing Trustee Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=500&q=80" },
-  { key: "about_director_name", label: "Director of Academics Name", type: "text", group: "About Page", default: "[Director's Name]" },
   { key: "about_director_photo", label: "Director Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" },
-  { key: "about_vp_name", label: "Vice Principal Name", type: "text", group: "About Page", default: "[Name]" },
-  { key: "about_vp_photo", label: "Vice Principal Photo", type: "image", group: "About Page", default: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&q=80" },
+  { key: "about_director_name", label: "Director Name", type: "text", group: "About Page", default: "[Director's Name]" },
+  { key: "about_director_quote", label: "Director Quote", type: "textarea", group: "About Page", default: "A short message from the Director about the academy." },
   // ---------- ACADEMICS PAGE ----------
   { key: "academics_early_years_desc", label: "Early Years — Description", type: "textarea", group: "Academics Page", default: "Play-based, sensory-rich learning that develops language, motor skills, and early social confidence." },
   { key: "academics_primary_desc", label: "Primary School — Description", type: "textarea", group: "Academics Page", default: "Core literacy and numeracy taught alongside EVS, art and inquiry-based science." },
