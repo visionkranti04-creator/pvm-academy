@@ -506,3 +506,8 @@ body.loaded { opacity: 1; }
   .instagram-float { width: 48px; height: 48px; bottom: 74px; right: 18px; }
   .instagram-float i { font-size: 22px; }
 }
+/* ---------- Second floating WhatsApp button, next to the first ---------- */
+.whatsapp-float-2 { right: 90px; }
+@media (max-width: 560px) {
+  .whatsapp-float-2 { right: 76px; }
+}
