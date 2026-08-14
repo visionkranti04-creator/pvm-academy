@@ -511,3 +511,26 @@ body.loaded { opacity: 1; }
 @media (max-width: 560px) {
   .whatsapp-float-2 { right: 76px; }
 }
+/* ---------- Mandatory Public Disclosure tables ---------- */
+.disclosure-table { width: 100%; border-collapse: collapse; margin: 20px 0 40px; font-size: 14.5px; }
+.disclosure-table th, .disclosure-table td {
+  border: 1px solid var(--line); padding: 12px 14px; text-align: left; vertical-align: top;
+}
+.disclosure-table th {
+  background: var(--navy); color: var(--white); font-family: var(--font-mono);
+  font-size: 12px; text-transform: uppercase; letter-spacing: .04em;
+}
+.disclosure-table tr:nth-child(even) td { background: var(--parchment-dim); }
+.disclosure-table td:first-child { width: 48px; text-align: center; color: var(--ink-soft); }
+.disclosure-table a.doc-link {
+  color: var(--gold); font-weight: 600; text-decoration: underline;
+}
+.disclosure-section-title { margin-top: 50px; }
+.disclosure-section-title:first-child { margin-top: 0; }
+@media (max-width: 700px) {
+  .disclosure-table, .disclosure-table thead, .disclosure-table tbody, .disclosure-table th, .disclosure-table td, .disclosure-table tr { display: block; }
+  .disclosure-table thead { display: none; }
+  .disclosure-table tr { border: 1px solid var(--line); margin-bottom: 14px; }
+  .disclosure-table td { border: none; border-bottom: 1px solid var(--line); }
+  .disclosure-table td:first-child { display: none; }
+}
