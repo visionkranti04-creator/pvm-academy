@@ -165,4 +165,13 @@ const CONTENT_FIELDS = [
   { key: "disclosure_girls_toilets", label: "No. of Girls Toilets", type: "text", group: "Mandatory Disclosure — Infrastructure", default: "[Number]" },
   { key: "disclosure_boys_toilets", label: "No. of Boys Toilets", type: "text", group: "Mandatory Disclosure — Infrastructure", default: "[Number]" },
   { key: "disclosure_youtube_link", label: "YouTube Video Link (School Infrastructure Tour)", type: "text", group: "Mandatory Disclosure — Infrastructure", default: "" },
+  // ---------- WEBSITE INFORMATION ----------
+  { key: "website_url", label: "URL of the Website", type: "text", group: "Website Information", default: "https://www.pvminternationalacademy.com" },
+  { key: "website_curriculum", label: "Details of the Curriculum", type: "text", group: "Website Information", default: "CBSE" },
+  { key: "website_smc_doc", label: "School Managing Committee Info (PDF)", type: "image", group: "Website Information", default: "" },
+  { key: "website_tc_sample_doc", label: "Transfer Certificate Sample (PDF)", type: "image", group: "Website Information", default: "" },
+  { key: "website_affiliation_status", label: "Affiliation Status", type: "text", group: "Website Information", default: "[Affiliation Status]" },
+  { key: "website_infrastructure_doc", label: "Details of Infrastructure (PDF)", type: "image", group: "Website Information", default: "" },
+  { key: "website_teachers_doc", label: "Details of Teachers incl. Qualifications (PDF)", type: "image", group: "Website Information", default: "" },
+  { key: "website_students_doc", label: "Number of Students Class-Wise (PDF)", type: "image", group: "Website Information", default: "" },
 ];
