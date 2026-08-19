@@ -112,7 +112,7 @@ function renderField(f, existing) {
     return `
       <div class="field-block">
         <label>${f.label}</label>
-        <input type="file" accept="image/*,video/mp4" id="file-${f.key}" />
+        <input type="file" accept="image/*,video/mp4,application/pdf" id="file-${f.key}" />
         <input type="hidden" id="input-${f.key}" value="${escaped}" />
         <div id="preview-${f.key}">${preview}</div>
         <div class="field-row">
