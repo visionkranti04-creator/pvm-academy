@@ -534,3 +534,10 @@ body.loaded { opacity: 1; }
   .disclosure-table td { border: none; border-bottom: 1px solid var(--line); }
   .disclosure-table td:first-child { display: none; }
 }
+/* ---------- Disabled document links (not uploaded yet) ---------- */
+.doc-link-disabled {
+  opacity: 0.45;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  text-decoration: none !important;
+}

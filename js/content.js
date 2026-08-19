@@ -52,10 +52,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-    linkTargets.forEach((el) => {
+        linkTargets.forEach((el) => {
       const key = el.dataset.linkKey;
-      if (!(key in map) || !map[key]) return;
-      el.href = map[key];
+      if (key in map && map[key]) {
+        el.href = map[key];
+        el.classList.remove("doc-link-disabled");
+      } else {
+        el.removeAttribute("href");
+        el.removeAttribute("download");
+        el.classList.add("doc-link-disabled");
+        el.setAttribute("aria-disabled", "true");
+      }
     });
   } catch (err) {
     console.error("Content load failed:", err);
